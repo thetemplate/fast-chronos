@@ -2,7 +2,7 @@
   <div class="wrapper">
     <notifications></notifications>
     <side-bar>
-      <template slot-scope="props" slot="links">
+      <template slot="links">
 
         <sidebar-item
           :link="{
