@@ -242,7 +242,7 @@
           <div class="dropdown-divider"></div>
           <a href="#!" class="dropdown-item">
             <i class="ni ni-user-run"></i>
-            <span>Logout</span>
+            <span @click="logout">Logout</span>
           </a>
 
         </template>
@@ -254,6 +254,7 @@
   import { CollapseTransition } from 'vue2-transitions';
   import BaseNav from '@/components/argon-core/Navbar/BaseNav.vue';
   import Modal from '@/components/argon-core/Modal.vue';
+  import {removeAuthCookies} from "@/util/settings";
 
   export default {
     components: {
@@ -297,7 +298,16 @@
       },
       hideSidebar() {
         this.$sidebar.displaySidebar(false);
+      },
+
+      logout() {
+        this.$auth.logout();
+        localStorage.removeItem('auth._token.local');
+        removeAuthCookies();
+        setTimeout(() => location.reload(), 500);
+        console.log(this.$auth.loggedIn);
       }
+
     }
   };
 </script>

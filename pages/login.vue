@@ -1,5 +1,6 @@
 <template>
   <div>
+    <notifications></notifications>
     <!-- Header -->
     <div class="header bg-gradient-success py-7 py-lg-8 pt-lg-9">
       <div class="container">
@@ -99,25 +100,34 @@
       async onSubmit() {
           
           try {
-          
             var bodyFormData = new FormData();
-            bodyFormData.set('username', 'demo');
-            bodyFormData.set('password', 'demo');
-
+            bodyFormData.set('username', this.model.email);
+            bodyFormData.set('password', this.model.password);
             await this.$auth.loginWith('local', {
               data: bodyFormData
-            })
-
+            });
+            
+            setTimeout(() => this.$notify({
+              message:
+                `Welcome back ${this.model.email}. You're logged in successfully`,
+              timeout: 5000,
+              icon: 'ni ni-bell-55',
+              type:'success',
+              verticalAlign:'bottom'
+            }), 1000);
+            
+          
           } catch (error) {
+
+            this.$notify({
+              message:
+                `Sorry but we have an issue. ${error}`,
+              timeout: 5000,
+              icon: 'ni ni-bell-55',
+              type:'warning'
+            });
             console.log(error);
           }
-
-
-          /*var bodyFormData = new FormData();
-          bodyFormData.set('username', 'demo');
-          bodyFormData.set('password', 'demo');
-          const response = await this.$axios.post('http://10.0.0.203:5000/api/v1/login/access-token', bodyFormData, {headers: {'Content-Type': 'multipart/form-data'}});
-          console.log('Reponse = ' + JSON.stringify(response)); */
       
       }
             

@@ -96,13 +96,13 @@ module.exports = {
       login: '/login',
       logout: '/',
       callback: '/login',
-      home: '/'
+      home: '/dashboard'
     },
     strategies:{
       local:{
         endpoints: {
           login: {url:'http://10.0.0.203:5000/api/v1/login/access-token', method:'post', propertyName:'access_token', headers: {'Content-Type': 'application/x-www-form-urlencoded', 'accept':'application/json'}},
-          logout: {url:'/auth/logout', method:'post'},
+          logout: {url:'http://10.0.0.203:5000/api/v1/logout', method:'post'},
           user: {url:'http://10.0.0.203:5000/api/v1/users/me', method:'get', propertyName: false}
         }
       }
